@@ -5,7 +5,7 @@ import com.project.pao.entities.Reader;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 public class ReaderInput {
@@ -37,7 +37,7 @@ public class ReaderInput {
                 reader.setGender(params[4]);
                 reader.setEmail(params[5]);
                 reader.setPhoneNumber(params[6]);
-                reader.setBookList(new ArrayList<Book>());
+                reader.setBookList(new HashSet<Book>());
 
                 readers.add(reader);
 

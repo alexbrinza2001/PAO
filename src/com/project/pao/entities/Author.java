@@ -53,4 +53,9 @@ public class Author extends Person{
                 '}';
     }
 
+    @Override
+    public int compareTo(Reader reader) {
+        return 0;
+    }
+
 }

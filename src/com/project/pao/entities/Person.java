@@ -1,6 +1,6 @@
 package com.project.pao.entities;
 
-public class Person {
+public abstract class Person {
 
     protected String firstName;
     protected String lastName;
@@ -48,4 +48,6 @@ public class Person {
                 ", gender='" + gender + '\'' +
                 '}';
     }
+
+    public abstract int compareTo(Reader reader);
 }

@@ -10,9 +10,7 @@ import com.project.pao.entities.Librarian;
 import com.project.pao.entities.Reader;
 import com.project.pao.services.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
@@ -29,7 +27,7 @@ public class Main {
         List<Reader> readers = readerService.getReaders();
         List<Librarian> librarians = librarianService.getLibrarians();
 
-        Boolean exit = Boolean.FALSE;
+        boolean exit = Boolean.FALSE;
 
         while (!exit) {
             System.out.println("MENU");
@@ -77,7 +75,7 @@ public class Main {
                     System.out.println("New Description:");
                     String newDescription = scanner.nextLine();
 
-                    Boolean ok = Boolean.FALSE;
+                    boolean ok = Boolean.FALSE;
 
                     for (Book book : books)
                         if (book.getName().compareTo(name) == 0) {
@@ -155,9 +153,18 @@ public class Main {
 
                     if (readerList.size() == 0)
                         System.out.println("There are no books on loan at the moment!");
-                    else
+                    else {
+
+                        readerList.sort(new Comparator<Reader>() {
+                            @Override
+                            public int compare(Reader r1, Reader r2) {
+                                return r1.getLastName().compareTo(r2.getLastName());
+                            }
+                        });
+
                         for (Reader reader : readerList)
-                            System.out.println(reader.getFirstName() + reader.getLastName());
+                            System.out.println(reader.getFirstName() + " " + reader.getLastName());
+                    }
 
                     auditService.auditWrite("Showed all names of readers");
                 }
@@ -184,7 +191,7 @@ public class Main {
                     System.out.println("Your phone number:");
                     reader.setPhoneNumber(scanner.nextLine());
 
-                    reader.setBookList(new ArrayList<Book>());
+                    reader.setBookList(new HashSet<Book>());
 
                     readers.add(reader);
 
@@ -193,7 +200,7 @@ public class Main {
                 case 8 -> {
                     System.out.println("Your last name:");
                     String name = scanner.nextLine();
-                    Boolean ok = Boolean.FALSE;
+                    boolean ok = Boolean.FALSE;
 
                     for (Reader reader : readers)
                         if (reader.getLastName().compareTo(name) == 0) {
@@ -202,7 +209,7 @@ public class Main {
                             else {
                                 System.out.println("Name of the book you want to return:");
                                 String bookName = scanner.nextLine();
-                                Boolean okBook = Boolean.FALSE;
+                                boolean okBook = Boolean.FALSE;
                                 for (Book book : reader.getBookList())
                                     if (book.getName().compareTo(bookName) == 0) {
                                         book.setLoaned(Boolean.FALSE);

@@ -54,4 +54,9 @@ public class Librarian extends Person{
                 ", gender='" + gender + '\'' +
                 '}';
     }
+
+    @Override
+    public int compareTo(Reader reader) {
+        return 0;
+    }
 }

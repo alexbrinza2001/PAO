@@ -1,13 +1,13 @@
 package com.project.pao.entities;
 
-import java.util.List;
+import java.util.Set;
 
 public class Reader extends Person{
 
     private Integer readerId;
     private String email;
     private String phoneNumber;
-    private List<Book> bookList;
+    private Set<Book> bookList;
 
     public Integer getReaderId() {
         return readerId;
@@ -33,11 +33,11 @@ public class Reader extends Person{
         this.email = email;
     }
 
-    public List<Book> getBookList() {
+    public Set<Book> getBookList() {
         return bookList;
     }
 
-    public void setBookList(List<Book> bookList) {
+    public void setBookList(Set<Book> bookList) {
         this.bookList = bookList;
     }
 
@@ -53,5 +53,13 @@ public class Reader extends Person{
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", bookList=" + bookList +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Reader reader) {
+        if (getLastName() == null || reader.getLastName() == null) {
+            return 0;
+        }
+        return getLastName().compareTo(reader.getLastName());
     }
 }
